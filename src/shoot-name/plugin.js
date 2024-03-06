@@ -1,9 +1,9 @@
 module.exports = function ({template}) {
     return {
         visitor: {
-            Scopable(path, state) {
-                console.log(path.toString(), ' ', path.scope.bindings)
-                
+            Identifier(path, state) {
+                const newName = path.scope.generateUid(path.node.name)
+                path.scope.rename(path.node.name,newName)
             }
         }
     }
